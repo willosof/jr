@@ -1,0 +1,4 @@
+apps:
+  - script: index.js
+    name: "rescuejet"
+    instances: 1

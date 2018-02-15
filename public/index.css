@@ -1,0 +1,54 @@
+#wrapper {
+	padding-top: 10px;
+}
+body {
+		min-width:600px;
+}
+
+#page_content > div {
+	padding:15px;
+	width:100%;
+}
+
+.logfield {
+	width:100%;
+	height: 300px;
+}
+
+#settings {
+	padding:15px;
+}
+
+#mmsilist {
+	font-size: 1.2em;
+	padding-top:10px;
+}
+
+#basicMap, .basicMap {
+  width: 100%;
+  height: 800px;
+  margin: 0;
+}
+
+#status_wrapper .btn {
+	font-size: 12px !important;
+}
+
+#status_wrapper {
+	font-size: 12px;
+	clear:both;
+	padding-bottom: 30px;
+	background-color: white;
+	right:10px;
+	top: 10px;
+}
+
+#status_wrapper ul {
+	padding-right: 20px;
+}
+
+#status_wrapper ul li {
+	list-style:none;
+	float:right;
+	padding-left: 10px;
+}

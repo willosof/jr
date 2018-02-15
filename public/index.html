@@ -1,0 +1,109 @@
+<!doctype html>
+<!-- nettsiden som blir lastet på http://<rpi-ipen>/i nettleseren -->
+<html lang="en">
+    <head>
+			<title>Rescuejet</title>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="/bootstrap/css/bootstrap-grid.min.css">
+			<link rel="stylesheet" href="/bootstrap/css/bootstrap-reboot.min.css">
+			<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+			<link rel="stylesheet" href="/fa/css/fontawesome-all.min.css">
+			<link rel="stylesheet" href="/index.css">
+    </head>
+    <body>
+
+			<div id="status_wrapper">
+				<ul>
+					<li><span class='btn btn-warning bnt-sm' id='status_gps'>?</span>&nbsp;&nbsp;GPS</li>
+					<li><span class='btn btn-warning bnt-sm' id='status_compass'>?</span>&nbsp;&nbsp;Compass</li>
+					<li><span class='btn btn-warning bnt-sm' id='status_ais_radio'>?</span>&nbsp;&nbsp;AIS Radio</li>
+					<li><span class='btn btn-warning bnt-sm' id='status_ais_receiving'>?</span>&nbsp;&nbsp;AIS Receiving</li>
+					<li><span class='btn btn-warning bnt-sm' id='status_control'>?</span>&nbsp;&nbsp;Control</li>
+				</ul>
+			</div>
+
+			<div class="container-fluid" id="wrapper">
+				<div role="tabpanel">
+
+				  <ul class="nav nav-tabs" id="myTab" role="tablist">
+				    <li class="nav-item"><a class="nav-link active" id="map-tab" data-toggle="tab" href="#map"        role="tab" aria-controls="map" aria-expanded="true">Rescuejet Map</a></li>
+				    <li class="nav-item"><a class="nav-link" id="rjsettings-tab" data-toggle="tab" href="#rjsettings" role="tab" aria-controls="rjsettings">Settings</a></li>
+				    <li class="nav-item"><a class="nav-link" id="logging-tab"    data-toggle="tab" href="#logging"    role="tab" aria-controls="logging">Logging</a></li>
+				  </ul>
+
+				  <div class="tab-content" id="page_content">
+
+				    <div class="tab-pane show active" id="map" role="tabpanel" aria-labelledby="map-tab">
+
+  						<div id="basicMap" class='basicMap'></div>
+
+				    </div>
+
+				    <div class="tab-pane" id="rjsettings" role="tabpanel" aria-labelledby="rjsettings-tab">
+
+							<h2>MMSI List</h2>
+							<div class="row">
+								<div class='col-lg-3'>
+							    <label for="settingsAddMMSI">Add MMSI</label>
+							    <input type="text" class="form-control" id="settingsAddMMSI" placeholder="MMSI number" />
+							    <input type="button" class="form-control btn btn-success" id="settingsAddMMSIButton" value="Add" />
+									<ul id='mmsilist'>
+									</ul>
+								</div>
+							</div>
+				    </div>
+				    <div class="tab-pane" id="logging" role="tabpanel" aria-labelledby="logging-tab">
+							<div class="row">
+
+								<div class='col-lg-3'>
+									<h3>GPS Log</h3>
+									<textarea class='logfield' id='log_gps'></textarea>
+								</div>
+
+								<div class='col-lg-3'>
+									<h3>AIS Log</h3>
+									<textarea class='logfield' id='log_ais'></textarea>
+								</div>
+
+								<div class='col-lg-3'>
+									<h3>Compass Log</h3>
+									<textarea class='logfield' id='log_compass'></textarea>
+								</div>
+
+								<div class='col-lg-3'>
+									<h3>Controls Log</h3>
+									<textarea class='logfield' id='log_control'></textarea>
+								</div>
+
+							</div>
+				    </div>
+
+				  </div>
+				</div>
+
+			</div>
+			<script src="/jquery/jquery.min.js"></script>
+			<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+			<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+			<script src="/index.js"></script>
+		  <script>
+
+		      function init() {
+	        	map = new OpenLayers.Map("basicMap");
+		        var mapnik         = new OpenLayers.Layer.OSM();
+		        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+		        var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+		        var position       = new OpenLayers.LonLat(10.75,59.90).transform( fromProjection, toProjection);
+		        var zoom           = 13;
+
+		        map.addLayer(mapnik);
+		        map.setCenter(position, zoom );
+      		}
+
+					init();
+
+		  </script>
+    </body>
+</html>
