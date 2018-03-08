@@ -34,25 +34,38 @@
 
 				  <div class="tab-content" id="page_content">
 
+						<!-- ################ PAGE CONTENT -->
 				    <div class="tab-pane show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-
   						<div id="basicMap" class='basicMap'></div>
-
 				    </div>
 
+						<!-- ################ PAGE CONTENT -->
 				    <div class="tab-pane" id="rjsettings" role="tabpanel" aria-labelledby="rjsettings-tab">
 
-							<h2>MMSI List</h2>
+							<h2>MOB List</h2>
 							<div class="row">
 								<div class='col-lg-3'>
 							    <label for="settingsAddMMSI">Add MMSI</label>
-							    <input type="text" class="form-control" id="settingsAddMMSI" placeholder="MMSI number" />
+									<input type="text" class="form-control" id="settingsAddMMSI" placeholder="MMSI number" />
 							    <input type="button" class="form-control btn btn-success" id="settingsAddMMSIButton" value="Add" />
 									<ul id='mmsilist'>
 									</ul>
 								</div>
 							</div>
-				    </div>
+
+							<h2>Boat MMSI</h2>
+							<div class="row">
+								<div class='col-lg-3'>
+							    <label>Save Boat MMSI</label>
+									<input type="text" class="form-control" id="settingsBoatMMSI" placeholder="MMSI number" />
+							    <input type="button" class="form-control btn btn-success" id="settingsSaveBoatMMSI" value="Save" />
+								</div>
+							</div>
+			    </div>
+
+
+
+						<!-- ################ LOGGING CONTENT -->
 				    <div class="tab-pane" id="logging" role="tabpanel" aria-labelledby="logging-tab">
 							<div class="row">
 
@@ -79,6 +92,12 @@
 							</div>
 				    </div>
 
+
+
+
+
+
+
 				  </div>
 				</div>
 
@@ -90,19 +109,6 @@
 			<script src="/index.js"></script>
 		  <script>
 
-		      function init() {
-	        	map = new OpenLayers.Map("basicMap");
-		        var mapnik         = new OpenLayers.Layer.OSM();
-		        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
-		        var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
-		        var position       = new OpenLayers.LonLat(10.75,59.90).transform( fromProjection, toProjection);
-		        var zoom           = 13;
-
-		        map.addLayer(mapnik);
-		        map.setCenter(position, zoom );
-      		}
-
-					init();
 
 		  </script>
     </body>

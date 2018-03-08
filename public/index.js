@@ -1,4 +1,7 @@
 
+var boat_position;
+var mmsi_list;
+
 $(function() {
 
 	var rpi = new io();
@@ -9,9 +12,20 @@ $(function() {
 	});
 
 	rpi.on('log', function(service, text) {
-		console.log('log():',service,text);
 		$("#log_"+service).val(text + '\n' + $("#log_"+service).val());
 	});
+
+	rpi.on('boat_mmsi', function(mmsi,pos) {
+		$("#settingsBoatMMSI").val(mmsi);
+		console.log("BOAT_MMSI():",mmsi,pos);
+		boat_position = pos;
+		update_map();
+	});
+
+	$("#settingsSaveBoatMMSI").click(function() {
+		rpi.emit('boat_mmsi_update', $("#settingsBoatMMSI").val() );
+	});
+
 
 	rpi.on('status', function(services) {
 
@@ -44,6 +58,7 @@ $(function() {
 
 	});
 
+
 	$("#settingsAddMMSIButton").click(function() {
 		var new_mmsi = $("#settingsAddMMSI").val();
 		if (new_mmsi !== undefined && new_mmsi.length > 0) {
@@ -53,7 +68,6 @@ $(function() {
 	});
 
 	var mmsi_add = function(id,name) {
-		console.log("mmsi_add()",id,name);
 		var $mmsilist = $('#mmsilist');
 		var $fake = $("<li><span class='btn btn-danger btn-sm' data-id='"+id+"'>delete</span> "+name+"</li>");
 		$mmsilist.append($fake);
@@ -61,7 +75,6 @@ $(function() {
 	}
 
 	rpi.on('mmsi_list', function(mmsis) {
-		console.log("socket mmsi_list", mmsis);
 		$('#mmsilist').html("");
 		for (var mmsi in mmsis) {
 			mmsi_add(mmsi,mmsi);
@@ -74,7 +87,68 @@ $(function() {
 	};
 
 
-/* status */
+	map = new OpenLayers.Map("basicMap");
+	var mapnik         = new OpenLayers.Layer.OSM();
+	var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+	var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+	var position       = new OpenLayers.LonLat(10.75,59.90).transform( fromProjection, toProjection);
+	var zoom           = 13;
+
+	map.addLayer(mapnik);
+	map.setCenter(position, zoom );
+
+	var markers = new OpenLayers.Layer.Markers( "Markers" );
+	map.addLayer(markers);
+
+
+	var addMarker = function(lat,lon) {
+		map.addLayer(new OpenLayers.Layer.OSM());
+		var lonLat = new OpenLayers.LonLat( lat,lon ).transform(
+						new OpenLayers.Projection("EPSG:4326"),
+						map.getProjectionObject()
+		);
+		var lonLat_two = new OpenLayers.LonLat( lat,lon ).transform(
+						new OpenLayers.Projection("EPSG:4326"),
+						map.getProjectionObject()
+		);
+
+		markers.addMarker(new OpenLayers.Marker(lonLat));
+
+
+
+	}
+
+	var update_map = function() {
+		markers.clearMarkers();
+		if (mmsi_list !== undefined) {
+			for (var mmsi in mmsi_list) {
+				var coord = mmsi_list[mmsi];
+				if (coord !== true && coord !== undefined) {
+					var latlng = coord.split(/,/);
+					addMarker(latlng[1], latlng[0]);
+				}
+			}
+		}
+
+		if (boat_position !== undefined) {
+			console.log("bott", boat_position);
+			var latlng = boat_position.split(/,/);
+			addMarker(latlng[1], latlng[0]);
+		}
+
+	};
+
+
+	rpi.on('boat_update', function(pos) {
+		boat_position = pos;
+		update_map();
+	});
+
+	rpi.on('mmsi_list', function(mmsis) {
+		mmsi_list = mmsis;
+		update_map();
+	})
+
 
 
 
