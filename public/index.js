@@ -143,6 +143,7 @@ $(function() {
 
 
 	rpi.on('boat_update', function(pos) {
+		console.log('boat_update()',pos);
 		boat_position = pos;
 		update_map();
 	});
