@@ -1,0 +1,3 @@
+#!/bin/bash
+
+../../aisdeco --device-index 0 --freq 161975000 --freq 162025000 --net 40003 2>&1 >>ais.log
