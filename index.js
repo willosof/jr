@@ -101,7 +101,7 @@ system.on('position_calculate', function() {
 
 					var mob_position = mmsi_list[mmsi].split(/,/);
 
-					console.log("CURRENT DISTANCE", boat_position, mob_position);
+					//console.log("CURRENT DISTANCE", boat_position, mob_position);
 
 					var dist = geodist({
 						lat: boat_position[0],
@@ -225,7 +225,7 @@ system.on('ais_packet', function(data) {
 		system.emit('mmsi_update', data.mmsi, pos);
 	}
 
-	system.emit('config_get', 'boat_mmsi', function(value) {
+	system.emit('config_get', 'boat_position', function(value) {
 		if (value == data.mmsi) {
 			system.emit('boat_update', data.mmsi, pos);
 			io.emit('boat_update', value);
