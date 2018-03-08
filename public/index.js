@@ -19,7 +19,10 @@ $(function() {
 		$("#settingsBoatMMSI").val(mmsi);
 		console.log("BOAT_MMSI():",mmsi,pos);
 		boat_position = pos;
-		update_map();
+		if (pos !== undefined) {
+			update_map();
+		}
+
 	});
 
 	$("#settingsSaveBoatMMSI").click(function() {
