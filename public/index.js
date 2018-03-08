@@ -104,19 +104,21 @@ $(function() {
 	map.addLayer(markers);
 
 
-	var addMarker = function(lat,lon) {
+	var addMarker = function(lat,lon, boat) {
+
 		map.addLayer(new OpenLayers.Layer.OSM());
+
 		var lonLat = new OpenLayers.LonLat( lat,lon ).transform(
-						new OpenLayers.Projection("EPSG:4326"),
-						map.getProjectionObject()
+			new OpenLayers.Projection("EPSG:4326"),
+			map.getProjectionObject()
 		);
+
 		var lonLat_two = new OpenLayers.LonLat( lat,lon ).transform(
-						new OpenLayers.Projection("EPSG:4326"),
-						map.getProjectionObject()
+			new OpenLayers.Projection("EPSG:4326"),
+			map.getProjectionObject()
 		);
 
 		markers.addMarker(new OpenLayers.Marker(lonLat));
-
 
 
 	}
@@ -128,7 +130,7 @@ $(function() {
 				var coord = mmsi_list[mmsi];
 				if (coord !== true && coord !== undefined) {
 					var latlng = coord.split(/,/);
-					addMarker(latlng[1], latlng[0]);
+					addMarker(latlng[1], latlng[0], false);
 				}
 			}
 		}
@@ -136,7 +138,7 @@ $(function() {
 		if (boat_position !== undefined && boat_position !== null) {
 			console.log("bott", boat_position);
 			var latlng = boat_position.split(/,/);
-			addMarker(latlng[1], latlng[0]);
+			addMarker(latlng[1], latlng[0], true);
 		}
 
 	};
