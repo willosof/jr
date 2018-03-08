@@ -9,6 +9,8 @@ var EventEmitter = require('events').EventEmitter;
 var system  = new EventEmitter();
 var ais     = require("./lib/ais")(system);
 var config  = require("./lib/config")(system);
+var serial  = require("./lib/serial")(system);
+
 var geodist = require('geodist')
 
 // ./rtl_ais -p 2 -n -h 0.0.0.0 -T
