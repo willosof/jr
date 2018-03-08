@@ -19,7 +19,7 @@ $(function() {
 		$("#settingsBoatMMSI").val(mmsi);
 		console.log("BOAT_MMSI():",mmsi,pos);
 		boat_position = pos;
-		if (pos !== undefined) {
+		if (pos !== undefined && pos !== null) {
 			update_map();
 		}
 
@@ -133,7 +133,7 @@ $(function() {
 			}
 		}
 
-		if (boat_position !== undefined) {
+		if (boat_position !== undefined && boat_position !== null) {
 			console.log("bott", boat_position);
 			var latlng = boat_position.split(/,/);
 			addMarker(latlng[1], latlng[0]);
