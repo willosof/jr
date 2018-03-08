@@ -1,4 +1,6 @@
 node_modules/
 mmsi.json
 config
+*/.DS_Store
+.DS_Store
 aisdaemon/ais.log
