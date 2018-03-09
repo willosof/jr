@@ -10,27 +10,23 @@ var system  = new EventEmitter();
 var ais     = require("./lib/ais")(system);
 var config  = require("./lib/config")(system);
 var serial  = require("./lib/serial")(system);
-
+var gps     = require("./lib/gps")(system);
+var control = require("./lib/control")(system);
+var compass = require("./lib/compass")(system);
 var geodist = require('geodist')
-
-// ./rtl_ais -p 2 -n -h 0.0.0.0 -T
-
-
 
 
 // Local state of the status representation
 var status  = {
-	//compass:       [ 'warning', '<span class="fa fa-exclamation-triangle"></span>' ],
-	compass:       [ 'warning', '<span class="fa fa-exclamation-triangle"></span>' ],
-	control:       [ 'ok', '<span class="fa fa-check"></span>' ],
-	gps:           [ 'ok', '<span class="fa fa-check"></span>' ],
-	ais_receiving: [ 'ok', '<span class="fa fa-times"></span>' ],
-	ais_radio:     [ 'ok', '<span class="fa fa-check"></span>' ]
+	compass:       [ 'danger', 'compass', '' ],
+	control:       [ 'danger', 'cogs', '' ],
+	gps:           [ 'danger', 'globe', '' ],
+	ais_receiving: [ 'danger', 'exclamation-triangle', '' ],
+	//ais_radio:     [ 'danger', 'exclamation-triangle', '' ]
 };
 
 // Local state of the MMSI list
 var mmsi_list = {};
-
 
 // Bind opp /public mappa til å være statiske filer :)
 app.use(express.static(__dirname + '/public'));
@@ -43,7 +39,6 @@ app.get('/', function(req, res,next) {
 
 // Status Section
 var sendStatus = function(client) {
-	console.log('sendStatus(',client.id,')')
 	client.emit('status', status);
 };
 
@@ -87,7 +82,7 @@ var sendBoatMMSI = function(client) {
 var saveMMSI = function() {
 	var json = JSON.stringify(mmsi_list);
 	fs.writeFile('mmsi.json', json, 'utf8', function() {
-		console.log("mmsi.json saved")
+		debug("mmsi.json saved")
 	});
 };
 
@@ -99,12 +94,7 @@ system.on('position_calculate', function() {
 			var boat_position = b.split(/,/);
 			for (var mmsi in mmsi_list) {
 				if (mmsi_list[mmsi] !== undefined) {
-					console.log("XX", mmsi_list[mmsi]);
-
 					var mob_position = mmsi_list[mmsi].split(/,/);
-
-					//console.log("CURRENT DISTANCE", boat_position, mob_position);
-
 					var dist = geodist({
 						lat: boat_position[0],
 						lon: boat_position[1]
@@ -115,8 +105,7 @@ system.on('position_calculate', function() {
 						exact: true,
 						unit: "meters"
 					});
-
-					console.log("CURRENT DISTANCE", mmsi, parseInt(dist) );
+					debug("CURRENT DISTANCE", mmsi, parseInt(dist) );
 				}
 			}
 		}
@@ -130,7 +119,7 @@ system.on('mmsi_update', function(mob_mmsi, mob_position) {
 
 
 system.on('boat_update', function(mmsi, pos) {
-	console.log("BOAT MOVED: ", pos);
+	debug("BOAT MOVED: ", pos);
 	system.emit('config_set', 'boat_position', pos);
 	system.emit('position_calculate');
 });
@@ -139,7 +128,7 @@ system.on('boat_update', function(mmsi, pos) {
 var loadMMSI = function() {
 	fs.readFile('mmsi.json', 'utf8', function readFileCallback(err, data){
     if (err) {
-      console.log(err);
+      debug("loadMMSI() error",err);
     }
 		else {
 			var test = JSON.parse(data);
@@ -154,21 +143,27 @@ var loadMMSI = function() {
 
 // Add something to the system log and tell the browsers about it.
 var syslog = function(device,text) {
-	console.log("sendLog()")
-	io.emit('log', device, text);
+ 	var date = new Date();
+  var d = date.toISOString().substr(11, 8);
+	io.emit('log', device, ''+d+' - ' + text);
 };
 
-// Update status locally and inform all clients
-var setStatus = function(key, bootstrap, text) {
-	console.log('setStatus(all):',key,bootstrap,text);
-	status[key] = [bootstrap, text];
+// add system listener for logging
+system.on('log', function(device,text) {
+	syslog(device,text);
+});
+
+
+// Status management
+system.on('set_status', function(key, state, fa, text) {
+	debug("set_status", key, status, fa, text);
+	status[key] = [state, fa, text];
 	io.emit('status', status);
-};
+});
 
 // Initlog has no other function that to test and verify that the browser
 // log window has connection to the backend.
 var initLog = function(client) {
-	console.log('initLog(',client.log,')');
 	client.emit('log', 'compass', '--- compass log start ---');
 	client.emit('log', 'gps', '--- gps log start ---');
 	client.emit('log', 'ais', '--- ais log start ---');
@@ -179,12 +174,10 @@ var initLog = function(client) {
 // to receive data.
 
 var sendRaceConditions = function(client) {
-	console.log('sendRaceConditions(',client.id,')')
-	sendStatus(client);
+	client.emit('status', status);
 	initLog(client);
 	sendMMSIs(client);
 	sendBoatMMSI(client);
-
 };
 
 
@@ -219,7 +212,7 @@ system.on('ais_packet', function(data) {
 	var pos = data.latitude + ',' + data.longitude;
 
 	if (mmsi_list[data.mmsi] === undefined) {
-		io.emit('log', 'ais', 'Got unknown mmsi ' + data.mmsi);
+		syslog('ais', 'Got unknown mmsi ' + data.mmsi);
 		//mmsi_list[data.mmsi] = pos;
 	}
 	else {
@@ -231,6 +224,7 @@ system.on('ais_packet', function(data) {
 		if (value == data.mmsi) {
 			system.emit('boat_update', data.mmsi, pos);
 			io.emit('boat_update', value);
+			syslog('ais', 'boat update: ' + value);
 		}
 	});
 

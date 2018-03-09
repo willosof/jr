@@ -32,33 +32,22 @@ $(function() {
 
 	rpi.on('status', function(services) {
 
+		var service_definition = {
+			'compass': 'Compass',
+			'control': 'Control',
+			'gps': 'GPS',
+			'ais_receiving': 'AIS'
+		};
+
+		$ul = $("#status_wrapper ul");
+		$ul.html("");
+
 		for (var i in services) {
-			var service = services[i];
-			console.log("HEHE", service);
-			var $status_button = $("#status_"+i);
-
-			if (service[0] == 'ok') {
-				$status_button.removeClass('btn-warning');
-				$status_button.removeClass('btn-danger');
-				$status_button.addClass('btn-success');
-			}
-
-			else if (service[0] == 'warning') {
-				$status_button.removeClass('btn-warning');
-				$status_button.removeClass('btn-success');
-				$status_button.addClass('btn-warning');
-			}
-
-			else {
-				$status_button.removeClass('btn-warning');
-				$status_button.removeClass('btn-success');
-				$status_button.addClass('btn-danger');
-			}
-
-			$status_button.html(service[1]);
-
+			var s = services[i];
+			console.log(s);
+			var $li = $("<li><span title='"+service_definition[i]+"' class='btn btn-"+s[0]+" btn-lg' id='status_"+i+"'><i class='fa fa-"+s[1]+"'></i> "+s[2]+"</span>&nbsp;</li>");
+			$li.appendTo($ul);
 		}
-
 	});
 
 

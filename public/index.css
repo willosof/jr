@@ -31,7 +31,7 @@ body {
 }
 
 #status_wrapper .btn {
-	font-size: 12px !important;
+	font-size: 17px !important;
 }
 
 #status_wrapper {
@@ -51,4 +51,20 @@ body {
 	list-style:none;
 	float:right;
 	padding-left: 10px;
+}
+
+
+.panel-heading {
+	background-color: #ccc;
+	padding:10px;
+	border-radius: 3px;
+}
+.logfield {
+	background-color: black;
+	font-family: monospace;
+	color: white;
+	padding:10px;
+}
+.panel {
+	margin-bottom: 20px;
 }
