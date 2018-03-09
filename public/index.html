@@ -15,11 +15,6 @@
 
 			<div id="status_wrapper">
 				<ul>
-					<li><span class='btn btn-warning bnt-sm' id='status_gps'>?</span>&nbsp;&nbsp;GPS</li>
-					<li><span class='btn btn-warning bnt-sm' id='status_compass'>?</span>&nbsp;&nbsp;Compass</li>
-					<li><span class='btn btn-warning bnt-sm' id='status_ais_radio'>?</span>&nbsp;&nbsp;AIS Radio</li>
-					<li><span class='btn btn-warning bnt-sm' id='status_ais_receiving'>?</span>&nbsp;&nbsp;AIS Receiving</li>
-					<li><span class='btn btn-warning bnt-sm' id='status_control'>?</span>&nbsp;&nbsp;Control</li>
 				</ul>
 			</div>
 
@@ -42,21 +37,19 @@
 						<!-- ################ PAGE CONTENT -->
 				    <div class="tab-pane" id="rjsettings" role="tabpanel" aria-labelledby="rjsettings-tab">
 
-							<h2>MOB List</h2>
 							<div class="row">
 								<div class='col-lg-3'>
+									<h2>MOB MMSI List</h2>
 							    <label for="settingsAddMMSI">Add MMSI</label>
 									<input type="text" class="form-control" id="settingsAddMMSI" placeholder="MMSI number" />
 							    <input type="button" class="form-control btn btn-success" id="settingsAddMMSIButton" value="Add" />
 									<ul id='mmsilist'>
 									</ul>
 								</div>
-							</div>
 
-							<h2>Boat MMSI</h2>
-							<div class="row">
 								<div class='col-lg-3'>
-							    <label>Save Boat MMSI</label>
+									<h2>Boat MMSI</h2>
+							    <label>Boat MMSI</label>
 									<input type="text" class="form-control" id="settingsBoatMMSI" placeholder="MMSI number" />
 							    <input type="button" class="form-control btn btn-success" id="settingsSaveBoatMMSI" value="Save" />
 								</div>
@@ -69,24 +62,37 @@
 				    <div class="tab-pane" id="logging" role="tabpanel" aria-labelledby="logging-tab">
 							<div class="row">
 
-								<div class='col-lg-3'>
-									<h3>GPS Log</h3>
-									<textarea class='logfield' id='log_gps'></textarea>
+								<div class='col-lg-6'>
+									<div class="panel panel-default">
+  									<div class="panel-heading"><i class='fa fa-compass'></i> Compass</div>
+  									<div class="panel-body">
+											<textarea class='logfield' id='log_compass'></textarea>
+										</div>
+									</div>
 								</div>
-
-								<div class='col-lg-3'>
-									<h3>AIS Log</h3>
-									<textarea class='logfield' id='log_ais'></textarea>
+								<div class='col-lg-6'>
+									<div class="panel panel-default">
+  									<div class="panel-heading"><i class='fa fa-signal'></i> AIS</div>
+  									<div class="panel-body">
+											<textarea class='logfield' id='log_ais'></textarea>
+										</div>
+									</div>
 								</div>
-
-								<div class='col-lg-3'>
-									<h3>Compass Log</h3>
-									<textarea class='logfield' id='log_compass'></textarea>
+								<div class='col-lg-6'>
+									<div class="panel panel-default">
+  									<div class="panel-heading"><i class='fa fa-globe'></i> GPS</div>
+  									<div class="panel-body">
+											<textarea class='logfield' id='log_gps'></textarea>
+										</div>
+									</div>
 								</div>
-
-								<div class='col-lg-3'>
-									<h3>Controls Log</h3>
-									<textarea class='logfield' id='log_control'></textarea>
+								<div class='col-lg-6'>
+									<div class="panel panel-default">
+  									<div class="panel-heading"><i class='fa fa-cogs'></i> Control</div>
+  									<div class="panel-body">
+											<textarea class='logfield' id='log_control'></textarea>
+										</div>
+									</div>
 								</div>
 
 							</div>
