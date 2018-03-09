@@ -15,6 +15,10 @@ $(function() {
 		$("#log_"+service).val(text + '\n' + $("#log_"+service).val());
 	});
 
+	rpi.on('gps',function(text) {
+		console.log(text);
+	});
+
 	rpi.on('boat_mmsi', function(mmsi,pos) {
 		$("#settingsBoatMMSI").val(mmsi);
 		console.log("BOAT_MMSI():",mmsi,pos);

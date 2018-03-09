@@ -153,6 +153,10 @@ system.on('log', function(device,text) {
 	syslog(device,text);
 });
 
+system.on('gps', function(text){
+	io.emit('gps',text);
+})
+
 
 // Status management
 system.on('set_status', function(key, state, fa, text) {
