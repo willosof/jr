@@ -126,9 +126,6 @@ system.on('boat_update', function(mmsi, pos) {
 	system.emit('position_calculate');
 });
 
-system.on('jet_update',function (lat,lon) {
-	debug("Jet moved: ",lat);
-});
 
 
 var loadMMSI = function() {
