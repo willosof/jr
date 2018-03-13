@@ -96,6 +96,7 @@ $(function() {
 	var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
 	var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
 	var position       = new OpenLayers.LonLat(10.75,59.90).transform( fromProjection, toProjection);
+	var jet_icon			 = new OpenLayers.Icon('img/jetrescuer.png');
 	var zoom           = 13;
 
 	map.addLayer(mapnik);
@@ -105,7 +106,7 @@ $(function() {
 	map.addLayer(markers);
 
 
-	var addMarker = function(lat,lon, boat) {
+	var addMarker = function(lat,lon, boat, icon) {
 
 		map.addLayer(new OpenLayers.Layer.OSM());
 
@@ -119,7 +120,7 @@ $(function() {
 			map.getProjectionObject()
 		);
 
-		markers.addMarker(new OpenLayers.Marker(lonLat));
+		markers.addMarker(new OpenLayers.Marker(lonLat, icon));
 
 
 	}
@@ -145,7 +146,7 @@ $(function() {
 			var latlon = jet_position.split(/[:/n]/);
 			console.log("lat", latlon[0]);
 			console.log("lon", latlon[1]);
-			addMarker(latlon[1], latlon[0], true).setUrl('fa/img/jetrescuer.png');
+			addMarker(latlon[1], latlon[0], true, jet_icon);
 		}
 
 	};
