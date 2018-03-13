@@ -144,7 +144,7 @@ $(function() {
 		if (jet_position !== undefined && jet_position !== null) {
 			var latlon = jet_position.split(/[:/n]/);
 			console.log("lat", latlon[1]);
-			console.log("lon", latlon[3]);
+			console.log("lon", latlon[2]);
 			addMarker(latlon[1], latlon[3], true);
 		}
 
