@@ -81,6 +81,12 @@ var sendBoatMMSI = function(client) {
 
 }
 
+var sendJetMMSI = function(client) {
+	system.on('location_data', function(pos){
+		client.emit('jet_update',pos);
+	});
+}
+
 var saveMMSI = function() {
 	var json = JSON.stringify(mmsi_list);
 	fs.writeFile('mmsi.json', json, 'utf8', function() {
@@ -181,6 +187,7 @@ var sendRaceConditions = function(client) {
 	initLog(client);
 	sendMMSIs(client);
 	sendBoatMMSI(client);
+	sendJetMMSI(client);
 };
 
 

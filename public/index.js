@@ -1,4 +1,4 @@
-
+var jet_position;
 var boat_position;
 var mmsi_list;
 
@@ -27,6 +27,14 @@ $(function() {
 			update_map();
 		}
 
+	});
+
+	rpi.on('jet_update', function(pos) {
+		console.log("JET_POS():", pos);
+		jet_position = pos;
+		if(pos !== undefined && pos !== null) {
+			update_map();
+		}
 	});
 
 	$("#settingsSaveBoatMMSI").click(function() {
@@ -132,6 +140,11 @@ $(function() {
 			console.log("bott", boat_position);
 			var latlng = boat_position.split(/,/);
 			addMarker(latlng[1], latlng[0], true);
+		}
+		if (jet_position !== undefined && jet_position !== null) {
+			console.log("jett", jet_position);
+			var latlon = jet_position.split(/[:/n]/);
+			addMarker(latlon[1], latlon[0], true); 
 		}
 
 	};
