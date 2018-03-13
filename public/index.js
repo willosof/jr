@@ -143,7 +143,7 @@ $(function() {
 		}
 		if (jet_position !== undefined && jet_position !== null) {
 			var latlon = jet_position.split(/[:]/);
-			console.log("lat", parseFloat(latlon[1]));
+			console.log("lat", latlon[0]);
 			console.log("lon", latlon[2]);
 			addMarker( parseFloat(latlon[1]), latlon[2], true);
 		}
