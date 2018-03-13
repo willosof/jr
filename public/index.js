@@ -96,7 +96,7 @@ $(function() {
 	var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
 	var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
 	var position       = new OpenLayers.LonLat(10.75,59.90).transform( fromProjection, toProjection);
-	var jet_icon			 = new OpenLayers.Icon('img/jetrescuer.png');
+	var jet_icon			 = new OpenLayers.Icon('/fa/img/jetrescuer.png');
 	var zoom           = 13;
 
 	map.addLayer(mapnik);
