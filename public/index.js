@@ -45,7 +45,7 @@ $(function() {
 	rpi.on('status', function(services) {
 
 		var service_definition = {
-			'compass': 'Compass',
+			'speed': 'Speed',
 			'control': 'Control',
 			'gps': 'GPS',
 			'ais_receiving': 'AIS'
@@ -99,6 +99,8 @@ $(function() {
 	var size					 = new OpenLayers.Size(31, 35);
 	var offset 				 = new OpenLayers.Pixel(-(size.w/2), -size.h);
 	var jet_icon			 = new OpenLayers.Icon('/fa/img/jetrescuer.png', size, offset);
+	var boat_icon			 = new OpenLayers.Icon('/fa/img/boat.png', size, offset);
+	var mob_icon			 = new OpenLayers.Icon('/fa/img/mob.png', size, offset);
 	var zoom           = 13;
 
 	map.addLayer(mapnik);
@@ -134,7 +136,7 @@ $(function() {
 				var coord = mmsi_list[mmsi];
 				if (coord !== true && coord !== undefined) {
 					var latlng = coord.split(/,/);
-					addMarker(latlng[1], latlng[0], false);
+					addMarker(latlng[1], latlng[0], false, mob_icon);
 				}
 			}
 		}
@@ -142,7 +144,7 @@ $(function() {
 		if (boat_position !== undefined && boat_position !== null) {
 			console.log("bott", boat_position);
 			var latlng = boat_position.split(/,/);
-			addMarker(latlng[1], latlng[0], true);
+			addMarker(latlng[1], latlng[0], true, boat_icon);
 		}
 		if (jet_position !== undefined && jet_position !== null) {
 			var latlon = jet_position.split(/[:/n]/);
