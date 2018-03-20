@@ -134,7 +134,8 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
-				console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
+				system.emit('distance', parseInt(dist));
+				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
 		}
 	});
@@ -253,10 +254,9 @@ system.on('ais_packet', function(data) {
 		system.emit('mmsi_update', data.mmsi, pos);
 	}
 
-console.log("boat_pos" + pos);
+
 
 	system.emit('config_get', 'boat_position', function(value) {
-		console.log("boat_pos");
 		if (value == data.mmsi) {
 			console.log("boat_pos" + pos);
 			system.emit('boat_update', data.mmsi, pos);
