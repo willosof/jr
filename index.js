@@ -126,7 +126,7 @@ system.on('position_calculate', function() {
 				var mob_position = mmsi_list[mmsi].split(/,/);
 				var dist = geodist({
 					lat: parseFloat(jet_position[0]),
-					lon: parserFloat(jet_position[1])
+					lon: parseFloat(jet_position[1])
 				}, {
 					lat: parseFloat(mob_position[0]),
 					lon: parseFloat(mob_position[1]),
