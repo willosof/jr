@@ -55,7 +55,7 @@ $(function() {
 
 		for (var i in services) {
 			var s = services[i];
-			console.log(s);
+			//console.log(s);
 			var $li = $("<li><span title='"+service_definition[i]+"' class='btn btn-"+s[0]+" btn-lg' id='status_"+i+"'><i class='fa fa-"+s[1]+"'></i> "+s[2]+"</span>&nbsp;</li>");
 			$li.appendTo($ul);
 		}
@@ -141,14 +141,13 @@ $(function() {
 		}
 
 		if (boat_position !== undefined && boat_position !== null) {
-			console.log("bott", boat_position);
+
 			var latlng = boat_position.split(/,/);
+			console.log("bott", latlng[1]);
 			addMarker(latlng[1], latlng[0], true, boat_icon);
 		}
 		if (jet_position !== undefined && jet_position !== null) {
 			var latlon = jet_position.split(/[:/n]/);
-			console.log("lat", latlon[0]);
-			console.log("lon", latlon[1]);
 			addMarker(latlon[1], latlon[0], true, jet_icon);
 		}
 
