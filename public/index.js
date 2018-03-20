@@ -30,7 +30,6 @@ $(function() {
 	});
 
 	rpi.on('jet_update', function(pos) {
-		console.log("JET_POS():", pos);
 		jet_position = pos;
 		if(pos !== undefined && pos !== null) {
 			update_map();

@@ -230,6 +230,7 @@ io.on('connect', function (client) {
 
 	// when boat mmsi changes from client
 	client.on('boat_mmsi_update', function(mmsi) {
+		debug("New boat"); 
 		system.emit('config_set', 'boat_mmsi', mmsi);
 		client.broadcast.emit('boat_mmsi', mmsi);
 	});
