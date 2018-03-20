@@ -249,9 +249,11 @@ system.on('ais_packet', function(data) {
 	}
 	else {
 		mmsi_list[data.mmsi] = pos;
-		console.log("boat_pos" + pos);
+
 		system.emit('mmsi_update', data.mmsi, pos);
 	}
+
+console.log("boat_pos" + pos);
 
 	system.emit('config_get', 'boat_position', function(value) {
 		console.log("boat_pos");
