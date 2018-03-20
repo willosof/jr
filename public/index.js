@@ -148,6 +148,7 @@ $(function() {
 		}
 		if (jet_position !== undefined && jet_position !== null) {
 			var latlon = jet_position.split(/[:/n]/);
+			console.log("jet", laton[1]);
 			addMarker(latlon[1], latlon[0], true, jet_icon);
 		}
 
