@@ -75,6 +75,7 @@ var sendBoatMMSI = function(client) {
 
 		system.emit('config_get', 'boat_position', function(boat_pos) {
 			client.emit('boat_mmsi', boat_mmsi, boat_pos);
+			console.log(boat_pos);
 		});
 
 	});
