@@ -136,7 +136,7 @@ $(function() {
 				var coord = mmsi_list[mmsi];
 				if (coord !== true && coord !== undefined) {
 					var latlng = coord.split(/,/);
-					addMarker(latlng[1], latlng[0], false, mob_icon);
+					addMarker(latlng[1], latlng[0], true, mob_icon);
 				}
 			}
 		}

@@ -118,6 +118,25 @@ system.on('position_calculate', function() {
 			}
 		}
 	});
+	system.on('location_data', function(data){
+		var jet_position = data.split(/[:\n]/);
+		for(var mmsi in mmsi_list) {
+			if (mmsi_list[mmsi] !== undefined) {
+				var mob_position = mmsi_list[mmsi].split(/,/);
+				var dist = geodist({
+					lat: jet_position[0],
+					lon: jet_position[1]
+				}, {
+					lat: mob_position[0],
+					lon: mob_position[1],
+				}, {
+					exact: true,
+					unit: "meters"
+				});
+				debug("CURRENT DISTANCE FROM JET", mmsi, parseInt(dist) );
+			}
+		}
+	});
 });
 
 
