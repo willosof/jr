@@ -135,7 +135,7 @@ $(function() {
 				var coord = mmsi_list[mmsi];
 				if (coord !== true && coord !== undefined) {
 					var latlng = coord.split(/,/);
-					addMarker(latlng[1], latlng[0], true, mob_icon);
+					addMarker(latlng[1], latlng[0], false, mob_icon);
 				}
 			}
 		}
@@ -144,7 +144,7 @@ $(function() {
 			var latlng = boat_position.split(/,/);
 			addMarker(latlng[1], latlng[0], true, boat_icon);
 		}
-		
+
 		if (jet_position !== undefined && jet_position !== null) {
 			var latlon = jet_position.split(/[:/n]/);
 			addMarker(latlon[1], latlon[0], true, jet_icon);
