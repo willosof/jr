@@ -253,8 +253,9 @@ system.on('ais_packet', function(data) {
 	}
 
 	system.emit('config_get', 'boat_position', function(value) {
+		console.log("boat_pos" + value);
 		if (value == data.mmsi) {
-			console.log("boat_pos" + value);
+		//	console.log("boat_pos" + value);
 			system.emit('boat_update', data.mmsi, pos);
 			io.emit('boat_update', value);
 			syslog('ais', 'boat update: ' + value);
