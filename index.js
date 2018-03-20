@@ -134,7 +134,7 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
-				debug("CURRENT DISTANCE FROM JET", mmsi, parseInt(dist) );
+				console.log("CURRENT DISTANCE FROM JET" + parseInt(dist) );
 			}
 		}
 	});
