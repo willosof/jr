@@ -147,7 +147,7 @@ system.on('mmsi_update', function(mob_mmsi, mob_position) {
 
 
 system.on('boat_update', function(mmsi, pos) {
-	console.log(pos);
+	console.log("boat moved" + mmsi);
 	debug("BOAT MOVED: ", pos);
 	system.emit('config_set', 'boat_position', pos);
 	system.emit('position_calculate');
