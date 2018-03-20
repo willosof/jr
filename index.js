@@ -75,7 +75,7 @@ var sendBoatMMSI = function(client) {
 
 		system.emit('config_get', 'boat_position', function(boat_pos) {
 			client.emit('boat_mmsi', boat_mmsi, boat_pos);
-			console.log(boat_pos);
+
 		});
 
 	});
@@ -147,6 +147,7 @@ system.on('mmsi_update', function(mob_mmsi, mob_position) {
 
 
 system.on('boat_update', function(mmsi, pos) {
+	console.log(pos);
 	debug("BOAT MOVED: ", pos);
 	system.emit('config_set', 'boat_position', pos);
 	system.emit('position_calculate');
@@ -253,6 +254,7 @@ system.on('ais_packet', function(data) {
 
 	system.emit('config_get', 'boat_position', function(value) {
 		if (value == data.mmsi) {
+			console.log("boat_pos" + pos);
 			system.emit('boat_update', data.mmsi, pos);
 			io.emit('boat_update', value);
 			syslog('ais', 'boat update: ' + value);
