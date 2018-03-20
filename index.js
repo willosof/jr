@@ -134,7 +134,7 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
-				console.log("CURRENT DISTANCE FROM JET" + parseInt(dist) );
+				console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
 		}
 	});
