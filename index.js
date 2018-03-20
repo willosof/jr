@@ -159,7 +159,7 @@ var loadMMSI = function() {
       debug("loadMMSI() error",err);
     }
 		else {
-			  debug("loadMMSI() ok");
+			  console.log("loadMMSI() ok");
 			var test = JSON.parse(data);
 			if (test !== undefined) {
 	    	mmsi_list = test;
