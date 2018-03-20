@@ -141,14 +141,12 @@ $(function() {
 		}
 
 		if (boat_position !== undefined && boat_position !== null) {
-
 			var latlng = boat_position.split(/,/);
-			console.log("bott", latlng[1]);
 			addMarker(latlng[1], latlng[0], true, boat_icon);
 		}
+		
 		if (jet_position !== undefined && jet_position !== null) {
 			var latlon = jet_position.split(/[:/n]/);
-			console.log("jet", latlon[1]);
 			addMarker(latlon[1], latlon[0], true, jet_icon);
 		}
 
