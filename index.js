@@ -159,6 +159,7 @@ var loadMMSI = function() {
       debug("loadMMSI() error",err);
     }
 		else {
+			  debug("loadMMSI() ok");
 			var test = JSON.parse(data);
 			if (test !== undefined) {
 	    	mmsi_list = test;
@@ -230,7 +231,7 @@ io.on('connect', function (client) {
 
 	// when boat mmsi changes from client
 	client.on('boat_mmsi_update', function(mmsi) {
-		console.log("New boat"); 
+		console.log("New boat");
 		system.emit('config_set', 'boat_mmsi', mmsi);
 		client.broadcast.emit('boat_mmsi', mmsi);
 	});
