@@ -125,11 +125,11 @@ system.on('position_calculate', function() {
 			if (mmsi_list[mmsi] !== undefined) {
 				var mob_position = mmsi_list[mmsi].split(/,/);
 				var dist = geodist({
-					lat: parseFloat(jet_position[0]),
-					lon: parseFloat(jet_position[1])
+					lat: jet_position[0],
+					lon: jet_position[1]
 				}, {
-					lat: parseFloat(mob_position[0]),
-					lon: parseFloat(mob_position[1]),
+					lat: mob_position[0],
+					lon: mob_position[1],
 				}, {
 					exact: true,
 					unit: "meters"
