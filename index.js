@@ -149,10 +149,10 @@ system.on('position_calculate', function() {
 				});
 				var heading = gpsHeading.calculateSync({
 					lat: jet_position[0],
-					lon: jet_position[1]
+					lon: jet_position[1],
 				}, {
 					lat: mob_position[0],
-					lon: mob_position[1]
+					lon: mob_position[1],
 			});
 			console.log("Kursen er =" + heading);
 				system.emit('distance', parseInt(dist));
