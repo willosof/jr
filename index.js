@@ -16,7 +16,7 @@ var gps     = require("./lib/gps")(system);
 var control = require("./lib/control")(system);
 var compass = require("./lib/compass")(system);
 var geodist = require('geodist');
-var gpsHeading = require('node-gps-heading');
+var gpsHeading = require('great-circle');
 
 
 
@@ -147,28 +147,9 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
-				var gps1 = {
-					lat: jet_position[0],
-					lon: jet_position[1],
-				}
+				var heading = gpsHeading.bearing(jet_position[0], jet_position[0], mob_position[0], mob_position[1]);
 
-				var gps2 = {
-					lat: mob_position[0],
-					lon: mob_position[1],
-				}
-				var heading = gpsHeading.calculateSync({
-					lat: parseFloat(jet_position[0]),
-					lon: parseFloat(jet_position[1]),
-				}, {
-					lat: parseFloat(mob_position[0]),
-					lon: parseFloat(mob_position[1]),
-			});
-			gpsHeading.calculate(gps1, gps2, function(heading) {
-  		console.log(heading.degree);
-  	console.log(heading.radian);
-		});
-
-			//console.log("Kursen er =" + heading.radian);
+			console.log("Kursen er =" + heading);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
