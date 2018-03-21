@@ -260,7 +260,7 @@ system.on('ais_packet', function(data) {
 		if (value == data.mmsi) {
 			console.log("boat_pos" + pos);
 			system.emit('boat_update', data.mmsi, pos);
-			io.emit('boat_update', value);
+			io.emit('boat_update', pos);
 			syslog('ais', 'boat update: ' + value);
 		}
 	});
