@@ -20,7 +20,7 @@ var geodist = require('geodist')
 
 // Local state of the status representation
 var status  = {
-	speed:         [ 'danger', 'speed', '' ],
+	speed:         [ 'danger', 'tachometer-alt', '' ],
 	control:       [ 'danger', 'cogs', '' ],
 	gps:           [ 'danger', 'globe', '' ],
 	ais_receiving: [ 'danger', 'exclamation-triangle', '' ],
