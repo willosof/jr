@@ -154,7 +154,7 @@ system.on('position_calculate', function() {
 					lat: mob_position[0],
 					lon: mob_position[1]
 			});
-			console.log("Kursen er =" + heading.degree);
+			console.log("MOB lon: " + mob_position[0]);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
