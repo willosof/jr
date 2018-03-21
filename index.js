@@ -157,11 +157,11 @@ system.on('position_calculate', function() {
 					lon: mob_position[1],
 				}
 				var heading = gpsHeading.calculateSync({
-					lat: jet_position[0],
-					lon: jet_position[1],
+					lat: parseFloat(jet_position[0]),
+					lon: parseFloat(jet_position[1]),
 				}, {
-					lat: mob_position[0],
-					lon: mob_position[1],
+					lat: parseFloat(mob_position[0]),
+					lon: parseFloat(mob_position[1]),
 			});
 			gpsHeading.calculate(gps1, gps2, function(heading) {
   		console.log(heading.degree);
