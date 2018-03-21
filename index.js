@@ -15,7 +15,9 @@ var serial  = require("./lib/serial")(system);
 var gps     = require("./lib/gps")(system);
 var control = require("./lib/control")(system);
 var compass = require("./lib/compass")(system);
-var geodist = require('geodist')
+var geodist = require('geodist');
+var gpsHeading = require('node-gps-heading');
+
 
 
 // Local state of the status representation
@@ -26,6 +28,17 @@ var status  = {
 	ais_receiving: [ 'danger', 'exclamation-triangle', '' ],
 	//ais_radio:     [ 'danger', 'exclamation-triangle', '' ]
 };
+
+var controller_status = {
+	stb_speed: ['danger', 'tachometer-alt', ''],
+	run_speed: ['danger', 'tachometer-alt', ''],
+	res_speed: ['danger', 'tachometer-alt', ''],
+	stop_speed: ['danger', 'tachometer-alt', ''],
+	stb_steering: ['danger', 'tachometer-alt', ''],
+	run_steering: ['danger', 'tachometer-alt', ''],
+	res_steering: ['danger', 'tachometer-alt', ''],
+	stop_steering: ['danger', 'tachometer-alt', ''],
+}
 
 // Local state of the MMSI list
 var mmsi_list = {};
@@ -134,6 +147,15 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
+				var heading = gpsHeading.calculateSync({
+					lat: jet_position[0],
+					lon: jet_position[1]
+				}, {
+					lat: mob_position[0],
+					lon: mob_position[1],
+				}
+			});
+			console.log("Kursen er =" + heading.degree);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
