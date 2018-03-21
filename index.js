@@ -147,6 +147,15 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
+				var gps1 = {
+					lat: jet_position[0],
+					lon: jet_position[1],
+				}
+
+				var gps2 = {
+					lat: mob_position[0],
+					lon: mob_position[1],
+				}
 				var heading = gpsHeading.calculateSync({
 					lat: jet_position[0],
 					lon: jet_position[1],
@@ -154,7 +163,12 @@ system.on('position_calculate', function() {
 					lat: mob_position[0],
 					lon: mob_position[1],
 			});
-			console.log("Kursen er =" + heading.radian);
+			gpsHeading.calculate(gps1, gps2, function(heading) {
+  		console.log(heading.degree);
+  	console.log(heading.radian);
+		});
+
+			//console.log("Kursen er =" + heading.radian);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
