@@ -153,7 +153,7 @@ system.on('position_calculate', function() {
 				}, {
 					lat: mob_position[0],
 					lon: mob_position[1],
-				}
+				
 			});
 			console.log("Kursen er =" + heading.degree);
 				system.emit('distance', parseInt(dist));
