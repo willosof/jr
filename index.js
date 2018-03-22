@@ -147,9 +147,6 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
-				var heading = gpsHeading.bearing(jet_position[0], jet_position[1], mob_position[0], mob_position[1]);
-
-			console.log("Kursen er =" + heading);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
