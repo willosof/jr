@@ -16,7 +16,7 @@ var gps     = require("./lib/gps")(system);
 var control = require("./lib/control")(system);
 var compass = require("./lib/compass")(system);
 var geodist = require('geodist');
-var gpsHeading = require('great-circle');
+var geolib = require('geolib'); 
 
 
 
