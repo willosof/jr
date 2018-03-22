@@ -133,7 +133,7 @@ system.on('position_calculate', function() {
 		}
 	});
 	system.on('location_data', function(data){
-		var jet_position = data.split(/[:\n]/);
+		var jet_position = data.split(/[:]/);
 		for(var mmsi in mmsi_list) {
 			if (mmsi_list[mmsi] !== undefined) {
 				var mob_position = mmsi_list[mmsi].split(/,/);
