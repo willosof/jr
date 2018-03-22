@@ -147,6 +147,14 @@ system.on('position_calculate', function() {
 					exact: true,
 					unit: "meters"
 				});
+				var heading = geolib.getBearing({
+					latitude: jet_position[0],
+					longitude: jet_position[1]
+				}, {
+					latitude: mob_position[0],
+					longitude: mob_position[1]
+				});
+				debug("Current heading to MOB:" + heading);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
