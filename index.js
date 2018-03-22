@@ -16,7 +16,7 @@ var gps     = require("./lib/gps")(system);
 var control = require("./lib/control")(system);
 var compass = require("./lib/compass")(system);
 var geodist = require('geodist');
-var geolib = require('geolib'); 
+var geolib = require('geolib');
 
 
 
@@ -148,11 +148,11 @@ system.on('position_calculate', function() {
 					unit: "meters"
 				});
 				var heading = geolib.getBearing({
-					latitude: jet_position[0],
-					longitude: jet_position[1]
+					latitude: jet_position[0].toString(),
+					longitude: jet_position[1].toString()
 				}, {
-					latitude: mob_position[0],
-					longitude: mob_position[1]
+					latitude: mob_position[0].toString(),
+					longitude: mob_position[1].toString()
 				});
 				debug("Current heading to MOB:" + heading);
 				system.emit('distance', parseInt(dist));
