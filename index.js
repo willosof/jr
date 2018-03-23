@@ -134,9 +134,11 @@ system.on('position_calculate', function() {
 	});
 	system.on('location_data', function(data){
 		var jet_position = data.split(/[:]/);
+		var jet_course = data.toString().split(/[:]/);
 		for(var mmsi in mmsi_list) {
 			if (mmsi_list[mmsi] !== undefined) {
 				var mob_position = mmsi_list[mmsi].split(/,/);
+				var mob_course = mmsi_list[mmsi].toString().split(/,/);
 				var dist = geodist({
 					lat: jet_position[0],
 					lon: jet_position[1]
@@ -148,13 +150,13 @@ system.on('position_calculate', function() {
 					unit: "meters"
 				});
 				var heading = geolib.getBearing({
-					latitude: jet_position[0].toString(),
-					longitude: jet_position[1].toString()
+					latitude: jet_course[0],
+					longitude: jet_course[1]
 				}, {
-					latitude: mob_position[0].toString(),
-					longitude: mob_position[1].toString()
+					latitude: mob_course[0],
+					longitude: mob_course[1]
 				});
-				debug("Current heading to MOB:" + heading);
+				console.log("Current heading to MOB:" + heading);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
