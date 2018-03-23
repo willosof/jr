@@ -157,6 +157,7 @@ system.on('position_calculate', function() {
 					longitude: mob_course[1]
 				});
 				console.log("Current heading to MOB:" + heading);
+				system.emit('heading', heading);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
