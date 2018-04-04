@@ -246,7 +246,8 @@ var initLog = function(client) {
 
 var sendRaceConditions = function(client) {
 	client.emit('status', status);
-	client.emit('controller_status', controller_status);
+	client.emit('speed_status', speed_status);
+	client.emit('steering_status', steering_status);
 	initLog(client);
 	sendMMSIs(client);
 	sendBoatMMSI(client);
