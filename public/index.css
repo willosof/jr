@@ -53,12 +53,12 @@ body {
 	padding-left: 10px;
 }
 
-#controller_wrapper .btn {
+#speed_wrapper .btn {
 	font-size: 17px !important;
 }
 
-#controller_wrapper {
-	font-size: 20px;
+#speed_wrapper {
+	font-size: 12px;
 	clear:both;
 	padding-bottom: 30px;
 	background-color: white;
@@ -66,11 +66,34 @@ body {
 	top: 10px;
 }
 
-#controller_wrapper ul {
+#speed_wrapper ul {
 	padding-right: 20px;
 }
 
-#controller_wrapper ul li {
+#speed_wrapper ul li {
+	list-style:none;
+	float:right;
+	padding-left: 10px;
+}
+
+#steering_wrapper .btn {
+	font-size: 17px !important;
+}
+
+#steering_wrapper {
+	font-size: 12px;
+	clear:both;
+	padding-bottom: 30px;
+	background-color: white;
+	right:10px;
+	top: 10px;
+}
+
+#steering_wrapper ul {
+	padding-right: 20px;
+}
+
+#steering_wrapper ul li {
 	list-style:none;
 	float:right;
 	padding-left: 10px;

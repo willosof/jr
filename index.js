@@ -29,17 +29,19 @@ var status  = {
 	//ais_radio:     [ 'danger', 'exclamation-triangle', '' ]
 };
 
-var controller_status = {
+var speed_status = {
 	stb_speed: ['danger', 'tachometer-alt', ''],
 	run_speed: ['danger', 'tachometer-alt', ''],
 	res_speed: ['danger', 'tachometer-alt', ''],
 	stop_speed: ['danger', 'tachometer-alt', ''],
-	stb_steering: ['danger', 'compass', ''],
-	run_steering: ['danger', 'compass', ''],
-	res_steering: ['danger', 'compass', ''],
-	stop_steering: ['danger', 'compass', ''],
-}
 
+}
+var steering_status = {
+stb_steering: ['danger', 'compass', ''],
+run_steering: ['danger', 'compass', ''],
+res_steering: ['danger', 'compass', ''],
+stop_steering: ['danger', 'compass', ''],
+}
 // Local state of the MMSI list
 var mmsi_list = {};
 
@@ -55,7 +57,8 @@ app.get('/', function(req, res,next) {
 // Status Section
 var sendStatus = function(client) {
 	client.emit('status', status);
-	client.emit('controller_status', controller_status);
+	client.emit('speed_status', speed_status);
+	client.emit('steering_status', steering_status);
 };
 
 
@@ -217,10 +220,16 @@ system.on('set_status', function(key, state, fa, text) {
 	io.emit('status', status);
 });
 
-system.on('controller_set_status', function(key, state, fa, text) {
-	debug("controller_set_status", key, controller_status, fa, text);
-	controller_status[key] = [state, fa, text];
-	io.emit('controller_status', controller_status);
+system.on('speed_set_status', function(key, state, fa, text) {
+	debug("speed_set_status", key, speed_status, fa, text);
+	speed_status[key] = [state, fa, text];
+	io.emit('speed_status', speed_status);
+});
+
+system.on('steering_set_status', function(key, state, fa, text) {
+	debug("steering_set_status", key, steering_status, fa, text);
+	steering_status[key] = [state, fa, text];
+	io.emit('steering_status', steering_status);
 });
 
 // Initlog has no other function that to test and verify that the browser
