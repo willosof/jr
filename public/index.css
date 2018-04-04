@@ -95,7 +95,7 @@ body {
 
 #steering_wrapper ul li {
 	list-style:none;
-	float:right;
+	padding-bottom: 10px;
 	padding-left: 10px;
 }
 
