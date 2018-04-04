@@ -119,6 +119,25 @@ $(function() {
 		}
 	});
 
+	rpi.on('nodstopp_status', function(services) {
+
+		var service_definition = {
+			'nodstopp_btn': 'Nodstopp',
+
+		};
+
+		$ul = $("#nodstopp_wrapper ul");
+		$ul.html("");
+
+		for (var i in services) {
+			var s = services[i];
+			//console.log(s);
+			var $li = $("<li><span title='"+service_definition[i]+"' class='btn btn-"+s[0]+" btn-lg' id='status_"+i+"'><i class='fa fa-"+s[1]+"'></i> "+s[2]+"</span>&nbsp;</li>");
+			$li.appendTo($ul);
+		}
+	});
+
+
 
 	$("#settingsAddMMSIButton").click(function() {
 		var new_mmsi = $("#settingsAddMMSI").val();

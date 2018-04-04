@@ -47,6 +47,10 @@ var gps_status = {
 	run_gps: ['danger', 'globe', ''],
 	res_gps: ['danger', 'globe', ''],
 }
+
+var nodstopp_status = {
+	nodstopp_btn: ['success', 'stop-sign', ''],
+}
 // Local state of the MMSI list
 var mmsi_list = {};
 
@@ -65,6 +69,7 @@ var sendStatus = function(client) {
 	client.emit('speed_status', speed_status);
 	client.emit('steering_status', steering_status);
 	client.emit('gps_status', gps_status);
+	client.emit('nodstopp_status', nodstopp_status);
 };
 
 
@@ -245,6 +250,12 @@ system.on('gps_set_status', function(key, state, fa, text) {
 	io.emit('gps_status', gps_status);
 });
 
+system.on('nodstopp_set_status', function(key, state, fa, text) {
+	debug("nodstopp_set_status", key, nodstopp_status, fa, text);
+	nodstopp_status[key] = [state, fa, text];
+	io.emit('nodstopp_status', nodstopp_status);
+});
+
 // Initlog has no other function that to test and verify that the browser
 // log window has connection to the backend.
 var initLog = function(client) {
@@ -262,6 +273,7 @@ var sendRaceConditions = function(client) {
 	client.emit('speed_status', speed_status);
 	client.emit('steering_status', steering_status);
 	client.emit('gps_status', gps_status);
+	client.emit('nodstopp_status', nodstopp_status);
 	initLog(client);
 	sendMMSIs(client);
 	sendBoatMMSI(client);
