@@ -22,6 +22,7 @@ var geolib = require('geolib');
 
 // Local state of the status representation
 var status  = {
+	steering: 			 ['danger', 'compass', '' ],
 	speed:         [ 'danger', 'tachometer-alt', '' ],
 	control:       [ 'danger', 'cogs', '' ],
 	gps:           [ 'danger', 'globe', '' ],
@@ -49,7 +50,7 @@ var gps_status = {
 }
 
 var nodstopp_status = {
-	nodstopp_btn: ['success', 'exclamation', 'Emergency Stop'],
+	nodstopp_btn: ['success', 'exclamation-triangle', 'Emergency Stop'],
 }
 // Local state of the MMSI list
 var mmsi_list = {};
