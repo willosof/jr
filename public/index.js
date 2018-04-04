@@ -61,6 +61,30 @@ $(function() {
 		}
 	});
 
+	rpi.on('controller_status', function(services) {
+
+		var service_definition = {
+			'stb_speed': 'Standby Speed',
+			'run_speed': 'Run Speed',
+			'res_speed': 'Restart Speed',
+			'stop_speed': 'Stop Speed',
+			'stb_steering': 'Standby Steering',
+			'run_steering': 'Run Steering',
+			'res_steering': 'Restart Steering',
+			'stop_steering': 'Stop Steering',
+		};
+
+		$ul = $("#controller_wrapper ul");
+		$ul.html("");
+
+		for (var i in services) {
+			var s = services[i];
+			//console.log(s);
+			var $li = $("<li><span title='"+service_definition[i]+"' class='btn btn-"+s[0]+" btn-lg' id='status_"+i+"'><i class='fa fa-"+s[1]+"'></i> "+s[2]+"</span>&nbsp;</li>");
+			$li.appendTo($ul);
+		}
+	});
+
 
 	$("#settingsAddMMSIButton").click(function() {
 		var new_mmsi = $("#settingsAddMMSI").val();
