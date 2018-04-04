@@ -54,7 +54,7 @@ body {
 }
 
 #speed_wrapper .btn {
-	font-size: 17px !important;
+	font-size: 20px !important;
 }
 
 #speed_wrapper {
@@ -72,7 +72,7 @@ body {
 
 #speed_wrapper ul li {
 	list-style:none;
-	
+
 	padding-left: 10px;
 }
 
