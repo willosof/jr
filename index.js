@@ -55,7 +55,7 @@ app.get('/', function(req, res,next) {
 // Status Section
 var sendStatus = function(client) {
 	client.emit('status', status);
-	client.emit('controller_status', status);
+	client.emit('controller_status', controller_status);
 };
 
 
@@ -220,7 +220,7 @@ system.on('set_status', function(key, state, fa, text) {
 system.on('controller_set_status', function(key, state, fa, text) {
 	debug("controller_set_status", key, controller_status, fa, text);
 	controller_status[key] = [state, fa, text];
-	io.emit('controller_status', status);
+	io.emit('controller_status', controller_status);
 });
 
 // Initlog has no other function that to test and verify that the browser
@@ -237,6 +237,7 @@ var initLog = function(client) {
 
 var sendRaceConditions = function(client) {
 	client.emit('status', status);
+	client.emit('controller_status', controller_status);
 	initLog(client);
 	sendMMSIs(client);
 	sendBoatMMSI(client);
