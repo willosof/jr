@@ -34,10 +34,10 @@ var controller_status = {
 	run_speed: ['danger', 'tachometer-alt', ''],
 	res_speed: ['danger', 'tachometer-alt', ''],
 	stop_speed: ['danger', 'tachometer-alt', ''],
-	stb_steering: ['danger', 'tachometer-alt', ''],
-	run_steering: ['danger', 'tachometer-alt', ''],
-	res_steering: ['danger', 'tachometer-alt', ''],
-	stop_steering: ['danger', 'tachometer-alt', ''],
+	stb_steering: ['danger', 'compass', ''],
+	run_steering: ['danger', 'compass', ''],
+	res_steering: ['danger', 'compass', ''],
+	stop_steering: ['danger', 'compass', ''],
 }
 
 // Local state of the MMSI list
