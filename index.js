@@ -22,9 +22,9 @@ var geolib = require('geolib');
 
 // Local state of the status representation
 var status  = {
-	steering: 			 ['danger', 'compass', '' ],
-	speed:         [ 'danger', 'tachometer-alt', '' ],
-	control:       [ 'danger', 'cogs', '' ],
+	steering: 			 ['danger', 'compass', 'fault' ],
+	speed:         [ 'danger', 'tachometer-alt', 'fault' ],
+	control:       [ 'danger', 'cogs', 'fault' ],
 	gps:           [ 'danger', 'globe', '' ],
 	ais_receiving: [ 'danger', 'exclamation-triangle', '' ],
 	//ais_radio:     [ 'danger', 'exclamation-triangle', '' ]
