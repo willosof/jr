@@ -30,26 +30,26 @@ var status  = {
 };
 
 var speed_status = {
-	stb_speed: ['danger', 'tachometer-alt', ''],
-	run_speed: ['danger', 'tachometer-alt', ''],
-	res_speed: ['danger', 'tachometer-alt', ''],
-	stop_speed: ['danger', 'tachometer-alt', ''],
+	stb_speed: ['danger', 'tachometer-alt', 'Standby'],
+	run_speed: ['danger', 'tachometer-alt', 'Run'],
+	res_speed: ['danger', 'tachometer-alt', 'Restart'],
+	stop_speed: ['danger', 'tachometer-alt', 'Stop'],
 
 }
 var steering_status = {
-	stb_steering: ['danger', 'compass', ''],
-	run_steering: ['danger', 'compass', ''],
-	res_steering: ['danger', 'compass', ''],
-	stop_steering: ['danger', 'compass', ''],
+	stb_steering: ['danger', 'compass', 'Standby'],
+	run_steering: ['danger', 'compass', 'Run'],
+	res_steering: ['danger', 'compass', 'Restart'],
+	stop_steering: ['danger', 'compass', 'Stop'],
 }
 
 var gps_status = {
-	run_gps: ['danger', 'globe', ''],
-	res_gps: ['danger', 'globe', ''],
+	run_gps: ['danger', 'globe', 'Run'],
+	res_gps: ['danger', 'globe', 'Restart'],
 }
 
 var nodstopp_status = {
-	nodstopp_btn: ['success', 'exclamation', ''],
+	nodstopp_btn: ['success', 'exclamation', 'Emergency Stop'],
 }
 // Local state of the MMSI list
 var mmsi_list = {};
