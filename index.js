@@ -50,7 +50,7 @@ var gps_status = {
 }
 
 var nodstopp_status = {
-	nodstopp_btn: ['success', 'exclamation-triangle', 'Emergency Stop'],
+	nodstopp_btn: ['success', 'exclamation-triangle', 'Emergency Break'],
 }
 // Local state of the MMSI list
 var mmsi_list = {};
