@@ -102,6 +102,27 @@ body {
 	padding-left: 10px;
 }
 
+#gps_wrapper {
+	font-size: 12px;
+	clear:both;
+	padding-bottom: 30px;
+	background-color: white;
+	right:10px;
+	top: 10px;
+}
+
+#gps_wrapper ul {
+	padding-right: 20px;
+	display: inline-block;
+
+}
+
+#gps_wrapper ul li {
+	list-style:none;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
 .panel-heading {
 	background-color: #ccc;
 	padding:10px;

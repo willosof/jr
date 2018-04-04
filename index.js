@@ -37,10 +37,15 @@ var speed_status = {
 
 }
 var steering_status = {
-stb_steering: ['danger', 'compass', ''],
-run_steering: ['danger', 'compass', ''],
-res_steering: ['danger', 'compass', ''],
-stop_steering: ['danger', 'compass', ''],
+	stb_steering: ['danger', 'compass', ''],
+	run_steering: ['danger', 'compass', ''],
+	res_steering: ['danger', 'compass', ''],
+	stop_steering: ['danger', 'compass', ''],
+}
+
+var gps_status = {
+	run_gps: ['danger', 'globe', ''],
+	res_gps: ['danger', 'globe', ''],
 }
 // Local state of the MMSI list
 var mmsi_list = {};
@@ -59,6 +64,7 @@ var sendStatus = function(client) {
 	client.emit('status', status);
 	client.emit('speed_status', speed_status);
 	client.emit('steering_status', steering_status);
+	client.emit('gps_status', gps_status);
 };
 
 
@@ -136,6 +142,7 @@ system.on('position_calculate', function() {
 			}
 		}
 	});
+
 	system.on('location_data', function(data){
 		var jet_position = data.split(/[:]/);
 		var jet_course = data.toString().split(/[:]/);
@@ -232,6 +239,12 @@ system.on('steering_set_status', function(key, state, fa, text) {
 	io.emit('steering_status', steering_status);
 });
 
+system.on('gps_set_status', function(key, state, fa, text) {
+	debug("gps_set_status", key, gps_status, fa, text);
+	gps_status[key] = [state, fa, text];
+	io.emit('gps_status', gps_status);
+});
+
 // Initlog has no other function that to test and verify that the browser
 // log window has connection to the backend.
 var initLog = function(client) {
@@ -248,6 +261,7 @@ var sendRaceConditions = function(client) {
 	client.emit('status', status);
 	client.emit('speed_status', speed_status);
 	client.emit('steering_status', steering_status);
+	client.emit('gps_status', gps_status);
 	initLog(client);
 	sendMMSIs(client);
 	sendBoatMMSI(client);
