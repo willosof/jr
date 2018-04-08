@@ -19,6 +19,10 @@ $(function() {
 		console.log(text);
 	});
 
+	rpi.on('heading', function(text){
+		$("#heading").val(text);
+	});
+
 	rpi.on('boat_mmsi', function(mmsi,pos) {
 		$("#settingsBoatMMSI").val(mmsi);
 		console.log("BOAT_MMSI():",mmsi,pos);

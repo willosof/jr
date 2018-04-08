@@ -22,9 +22,9 @@ var geolib = require('geolib');
 
 // Local state of the status representation
 var status  = {
-	steering: 		['danger', 'compass', 'fault' ],
-	speed:         [ 'danger', 'tachometer-alt', 'fault' ],
-	control:       [ 'danger', 'cogs', 'fault' ],
+	steering: 		['danger', 'compass', 'Steering' ],
+	speed:         [ 'danger', 'tachometer-alt', 'Speed' ],
+	control:       [ 'danger', 'cogs', 'Control' ],
 	gps:           [ 'danger', 'globe', '' ],
 	ais_receiving: [ 'danger', 'exclamation-triangle', '' ],
 	//ais_radio:     [ 'danger', 'exclamation-triangle', '' ]
@@ -175,6 +175,7 @@ system.on('position_calculate', function() {
 				});
 				console.log("Current heading to MOB:" + heading);
 				system.emit('heading', heading);
+				io.emit('heading', heading);
 				system.emit('distance', parseInt(dist));
 				//console.log("CURRENT DISTANCE FROM JET " + parseInt(dist) );
 			}
